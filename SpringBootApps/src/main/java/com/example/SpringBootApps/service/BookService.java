@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 /*
-Service class managing Book entities. (attributes of each entity
-(title, genre, etc... listed in Book class)
+Service class managing Book entities.
+This class lists all the services/functions that the program perform on Book entities
+ex. delete book, save new book, update any attribute of a book, etc...
  */
 @Service
 public class BookService {

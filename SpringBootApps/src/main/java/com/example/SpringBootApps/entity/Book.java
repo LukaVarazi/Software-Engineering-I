@@ -1,7 +1,9 @@
 package com.example.SpringBootApps.entity;
 import jakarta.persistence.*;
 
-//entity classes represent data models-- BOOK entity class
+//entity classes (for book entities/book objects)
+//includes getters and setters for book attributes.
+
 @Entity
 @Table(name = "book_table")
 public class Book {
@@ -45,7 +47,7 @@ public class Book {
     private String year_published;
 
 
-    // Constructors, getters and setters, and other methods...
+    //getters and setters
 
     // Getters
     public Long getId() {

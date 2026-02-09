@@ -10,7 +10,7 @@ import java.util.Optional;
 
 // controller class handles HTTP requests for REST API
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("")
 public class BookController {
 
     private final BookService bookService;
@@ -28,7 +28,7 @@ public class BookController {
     }
 
     //get all books
-    @PostMapping("/books")
+    @GetMapping("/books")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
@@ -42,13 +42,14 @@ public class BookController {
     }
 
     //update book by id.
-    @PutMapping("/products/{id}")
+    @PutMapping("/books/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
         Book updatedBook = bookService.updateBook(id, book);
         return ResponseEntity.ok(updatedBook);
     }
 
-    @DeleteMapping("/products/{id}")
+    //delete book
+    @DeleteMapping("/books/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return ResponseEntity.ok("Book deleted successfully");
