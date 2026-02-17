@@ -24,8 +24,8 @@ public class ShoppingCartController {
     }
 
     // get all books in a user's shopping cart
-    @GetMapping("/cart/{username}")
-    public List<ShoppingCart> getUserCart(@PathVariable String username) {
-        return shoppingCartRepository.findByUsername(username);
+    @GetMapping("/cart/{userId}")
+    public List<ShoppingCart> getUserCart(@PathVariable Integer userId) {
+        return shoppingCartRepository.findByUserId(userId);
     }
 }

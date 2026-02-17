@@ -11,6 +11,6 @@ import com.example.SpringBootApps.entity.ShoppingCart;
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
 
-    // find all cart items by username
-    List<ShoppingCart> findByUsername(String username);
+    List<ShoppingCart> findByUserId(Integer userId);
 }
+
