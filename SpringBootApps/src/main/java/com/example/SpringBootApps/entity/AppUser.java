@@ -1,32 +1,31 @@
-
+// =========================== entity/AppUser.java =============================
 package com.example.SpringBootApps.entity;
-
-import java.time.OffsetDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
-/**
- * AppUser maps to the PostgreSQL table: app_user
- * Stores profile info + hashed password (never plaintext).
- */
 @Entity
-@Table(name = "app_user")
+// IMPORTANT: match this EXACTLY to your DB table name.
+// Based on your successful POST, your table name appears to be "appuser_table".
+@Table(name = "appuser_table")
 public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    // IMPORTANT: match this EXACTLY to your DB primary key column name.
+    // Since your POST response returned userId=1, this should map to the real PK column.
+    // If your DB PK column is NOT user_id, adjust the name below.
+    @Column(name = "id")
     private Long userId;
 
     @Column(nullable = false, unique = true, length = 50)
     private String username;
 
+    // Stored in DB column password_hash (even if plaintext for now)
     @Column(name = "password_hash", nullable = false, length = 255)
     private String passwordHash;
 
@@ -38,16 +37,6 @@ public class AppUser {
 
     @Column(name = "home_address", length = 255)
     private String homeAddress;
-
-    @Column(name = "created_at", nullable = false)
-    private OffsetDateTime createdAt;
-
-    @PrePersist
-    void onCreate() {
-        if (createdAt == null) {
-            createdAt = OffsetDateTime.now();
-        }
-    }
 
     public Long getUserId() { return userId; }
     public void setUserId(Long userId) { this.userId = userId; }
@@ -66,7 +55,4 @@ public class AppUser {
 
     public String getHomeAddress() { return homeAddress; }
     public void setHomeAddress(String homeAddress) { this.homeAddress = homeAddress; }
-
-    public OffsetDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(OffsetDateTime createdAt) { this.createdAt = createdAt; }
 }

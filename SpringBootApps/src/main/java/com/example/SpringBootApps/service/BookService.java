@@ -1,12 +1,12 @@
 package com.example.SpringBootApps.service;
-import com.example.SpringBootApps.entity.Book;
-import com.example.SpringBootApps.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.SpringBootApps.entity.Book;
+import com.example.SpringBootApps.repository.BookRepository;
 
 /*
 Service class managing Book entities.
