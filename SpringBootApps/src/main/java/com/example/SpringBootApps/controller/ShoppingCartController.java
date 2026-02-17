@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.SpringBootApps.entity.ShoppingCart;
 import com.example.SpringBootApps.repository.ShoppingCartRepository;
 
-// controller class handles HTTP requests for Shopping Cart REST API
+// controller class handles HTTP requests for Shopping Cart REST API Only GET
 @RestController
 @RequestMapping("")
 public class ShoppingCartController {
