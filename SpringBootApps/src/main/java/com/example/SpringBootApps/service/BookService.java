@@ -36,7 +36,6 @@ public class BookService {
         return bookRepository.findById(id);
     }
 
-
     public Book updateBook(Long id, Book book) {
         Optional<Book> existingBook = bookRepository.findById(id);
         if (existingBook.isPresent()) {
