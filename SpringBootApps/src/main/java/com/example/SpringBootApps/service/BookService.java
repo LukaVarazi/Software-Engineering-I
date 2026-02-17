@@ -48,8 +48,16 @@ public class BookService {
     }
 
     //get book by author
-    public Optional<Book> getBookByAuthor(Long author) {
-        return bookRepository.findByAuthorId(author);
+    public Book getBookByAuthor (Long authorId){
+        Author author = authorRepository.getById(authorId);
+        String authorName = author.getFirstName();
+        List<Book> books = getAllBooks();
+        for (Book book : books){
+            if (book.getAuthor().equalsIgnoreCase(authorName)){
+                return book;
+            }
+        }
+        return null;
     }
 
     //===================================================================

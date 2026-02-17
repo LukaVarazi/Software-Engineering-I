@@ -56,11 +56,13 @@ public class BookController {
     }
 
     //get book by Author
-    @GetMapping("/books/author/{author}")
+    @GetMapping("/books/{authorId}")
     public ResponseEntity<Book> getBookByAuthor(@PathVariable Long author) {
-        Optional<Book> book = bookService.getBookByAuthor(author);
-        return book.map(ResponseEntity::ok).orElseGet(() ->
-                ResponseEntity.notFound().build());
+        Book book = bookService.getBookByAuthor(author);
+        if (book == null){
+            return ResponseEntity.notFound().build();
+        } 
+        return ResponseEntity.ok(book);
     }
 
     //===================================================================
