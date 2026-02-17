@@ -1,5 +1,8 @@
 package com.example.SpringBootApps.entity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 //entity classes (for book entities/book objects)
 //includes getters and setters for book attributes.
