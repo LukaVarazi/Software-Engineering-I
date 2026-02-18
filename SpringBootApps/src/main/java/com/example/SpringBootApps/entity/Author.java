@@ -1,6 +1,9 @@
 package com.example.SpringBootApps.entity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -9,7 +12,7 @@ import jakarta.persistence.Table;
 public class Author {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
 
@@ -20,53 +23,50 @@ public class Author {
     private String last_name;
 
     @Column(nullable = false)
-    private String bio;
+    private String biography;
 
     @Column(nullable = false)
     private String publisher;
 
-
-    //Getters and Setters
-
-    //Getters
+    // Getters
     public Long getId() {
         return id;
     }
 
-    public String getFirstName(){
+    public String getFirst_name() {
         return first_name;
     }
 
-    public String getLastName(){
+    public String getLast_name() {
         return last_name;
     }
 
-    public String getBio(){
-        return bio;
+    public String getBiography() {
+        return biography;
     }
-    
-    public String getPublisher(){
+
+    public String getPublisher() {
         return publisher;
     }
 
-    //Setters
-    public void setId(Long id){
+    // Setters
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setFirstName(String first_name){
+    public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
 
-    public void setLastName(String last_name){
+    public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
 
-    public void setBio(String bio){
-        this.bio = bio;
+    public void setBiography(String biography) {
+        this.biography = biography;
     }
 
-    public void setPublisher(String publisher){
+    public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
 }

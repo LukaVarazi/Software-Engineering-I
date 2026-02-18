@@ -50,8 +50,12 @@ public class BookController {
 
     //create a new Author.
     @PostMapping("/author")
-    public ResponseEntity<Author> saveAuthor(@RequestBody Author Author) {
-        Author newAuthor = bookService.saveAuthor(Author);
+    public ResponseEntity<Author> saveAuthor(@RequestBody Author author) {
+        System.out.println("Received author: " + author.getFirst_name() + " " + author.getLast_name());
+        System.out.println("Biography: " + author.getBiography());  // Add this debug line
+        System.out.println("Publisher: " + author.getPublisher());
+
+        Author newAuthor = bookService.saveAuthor(author);
         return ResponseEntity.ok(newAuthor);
     }
 
