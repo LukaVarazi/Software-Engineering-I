@@ -27,7 +27,7 @@ public class ShoppingCart {
     // relationship to book entity
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+    private Book bookID;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
@@ -38,14 +38,14 @@ public class ShoppingCart {
     // getters
     public Long getId() { return id; }
     public Integer getUserId() { return userId; }
-    public Book getBook() { return book; }
+    public Book getBookID() { return bookID; }
     public Integer getQuantity() { return quantity; }
     public Integer getTotalPrice() { return totalPrice; }
 
     // setters
     public void setId(Long id) { this.id = id; }
     public void setUserId(Integer userId) { this.userId = userId; }
-    public void setBook(Book book) { this.book = book; }
+    public void setBookID(Book book) { this.bookID = bookID; }
     public void setQuantity(Integer quantity) { this.quantity = quantity; }
     public void setTotalPrice(Integer totalPrice) { this.totalPrice = totalPrice; }
 }
