@@ -1,4 +1,3 @@
-// ===================== repository/AppUserRepository.java =====================
 package com.example.SpringBootApps.repository;
 
 import java.util.Optional;

@@ -1,6 +1,4 @@
-// =========================== entity/AppUser.java =============================
 package com.example.SpringBootApps.entity;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

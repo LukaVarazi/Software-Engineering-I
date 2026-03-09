@@ -1,6 +1,4 @@
-// ======================= controller/UserController.java =======================
 package com.example.SpringBootApps.controller;
-
 import java.util.HashMap;
 import java.util.Map;
 
