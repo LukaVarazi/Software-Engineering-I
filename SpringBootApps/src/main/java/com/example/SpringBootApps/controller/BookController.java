@@ -64,8 +64,8 @@ public class BookController {
 
     //get books by Author id
     @GetMapping("/authors/{id}")
-    public List<Book> getBooksByAuthor(@PathVariable Long authorId){
-        return bookRepository.findByAuthorId(authorId);
+    public List<Book> getBooksByAuthor(@PathVariable Long author_id){
+        return bookRepository.findByAuthorId(author_id);
     }
 
     //===================================================================
