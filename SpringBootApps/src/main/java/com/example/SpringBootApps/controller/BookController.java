@@ -60,7 +60,7 @@ public class BookController {
     }
 
     //get book by Author
-    @GetMapping("/books/{authorId}")
+    @GetMapping("/author/{id}")
     public ResponseEntity<Book> getBookByAuthor(@PathVariable Long author) {
         Book book = bookService.getBookByAuthor(author);
         if (book == null){
