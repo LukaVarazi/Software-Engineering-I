@@ -1,8 +1,5 @@
 package com.example.SpringBootApps.entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 //entity classes (for book entities/book objects)
 //includes getters and setters for book attributes.
@@ -12,7 +9,7 @@ import jakarta.persistence.Table;
 public class Book {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
 
