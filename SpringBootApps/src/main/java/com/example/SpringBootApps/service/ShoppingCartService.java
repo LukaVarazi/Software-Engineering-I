@@ -10,6 +10,8 @@ import com.example.SpringBootApps.entity.ShoppingCart;
 import com.example.SpringBootApps.repository.BookRepository;
 import com.example.SpringBootApps.repository.ShoppingCartRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ShoppingCartService {
 
@@ -72,6 +74,7 @@ public class ShoppingCartService {
     }
 
     // Remove book from cart
+    @Transactional
     public void removeBookFromCart(Integer userId, Long bookId) {
         shoppingCartRepository.deleteByUserIdAndBook_Id(userId, bookId);
     }

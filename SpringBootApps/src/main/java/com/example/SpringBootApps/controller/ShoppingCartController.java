@@ -32,14 +32,12 @@ public class ShoppingCartController {
         this.bookRepository = bookRepository;
     }
 
-    // STORY #16
     // Retrieve all books in user's cart
     @GetMapping("/cart/{userId}")
     public List<ShoppingCart> getUserCart(@PathVariable Integer userId) {
         return shoppingCartRepository.findByUserId(userId);
     }
 
-    // STORY #16
     // Calculate subtotal
     @GetMapping("/cart/{userId}/subtotal")
     public Double getCartSubtotal(@PathVariable Integer userId) {
@@ -55,7 +53,6 @@ public class ShoppingCartController {
         return subtotal;
     }
 
-    // STORY #17
     // Add book to cart
     @PostMapping("/cart/add")
     public ShoppingCart addBookToCart(
@@ -90,7 +87,6 @@ public class ShoppingCartController {
         return shoppingCartRepository.save(cartItem);
     }
 
-    // STORY #17
     // Remove book from cart
     @DeleteMapping("/cart/remove")
     public void removeBookFromCart(
