@@ -20,7 +20,7 @@ public class Book {
     private String title;
 
     @Column(nullable = false)
-    private String author;
+    private int author_id;
 
     @Column(nullable = false)
     private String genre;
@@ -59,8 +59,8 @@ public class Book {
     public String getTitle() {
         return title;}
 
-    public String getAuthor() {
-        return author;}
+    public int getAuthor() {
+        return author_id;}
 
     public String getGenre() {
         return genre;}
@@ -103,8 +103,8 @@ public class Book {
         this.genre = genre;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthor(int author_id) {
+        this.author_id = author_id;
     }
 
     public void setPublisher(String publisher) {
