@@ -8,16 +8,20 @@ import org.springframework.stereotype.Repository;
 
 import com.example.SpringBootApps.entity.Book;
 
-@Repository
-public interface BookRepository extends JpaRepository<Book, Long> {
-    // no extra methods needed
-}
 // repository interface handles database operations for the BOOK entity.
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
+
     @Query(
-        value = "SELECT * FROM book_table WHERE author_id = :author_id",
-        nativeQuery=true
+            value = "SELECT * FROM book_table WHERE genre LIKE CONCAT('%', :genre, '%')",
+            nativeQuery = true
     )
-    List<Book> findByAuthorId(@Param("author_id") Long authorId);
+    List<Book> findAllByGenre(@Param("genre") String genre);
+
+    /*@Query(
+
+    )
+    List<Book> findTop10Sellers(@Param(""))
+#
+     */
 }

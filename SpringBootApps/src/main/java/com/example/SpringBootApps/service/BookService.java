@@ -5,11 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.SpringBootApps.entity.Author;
 import com.example.SpringBootApps.entity.Book;
-import com.example.SpringBootApps.repository.AuthorRepository;
 import com.example.SpringBootApps.repository.BookRepository;
-
 
 /*
 Service class managing Book entities.
@@ -19,42 +16,27 @@ ex. delete book, save new book, update any attribute of a book, etc...
 @Service
 public class BookService {
     private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
 
     @Autowired
-    public BookService(BookRepository bookRepository,
-                       AuthorRepository authorRepository) {
+    public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.authorRepository = authorRepository;
     }
-
-    //===================================================================
-    // BOOK DETAILS
-    //===================================================================
 
     //saving a book
     public Book saveBook(Book book) {
         return bookRepository.save(book);
     }
 
-    //get book by id
+    //get list of all books.
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
+    }
+
+    //get book by id.
     public Optional<Book> getBookById(Long id) {
         return bookRepository.findById(id);
     }
 
-    //Save Author
-    public Author saveAuthor(Author author) {
-    return authorRepository.save(author);
-    }
-
-    //===================================================================
-    // REST
-    //===================================================================
-
-    //get list of all books
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
-    }
 
     public Book updateBook(Long id, Book book) {
         Optional<Book> existingBook = bookRepository.findById(id);
@@ -82,5 +64,6 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
-    //===================================================================
+
+
 }

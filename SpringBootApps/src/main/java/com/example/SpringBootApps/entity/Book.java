@@ -1,6 +1,8 @@
 package com.example.SpringBootApps.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -12,7 +14,7 @@ import jakarta.persistence.Table;
 public class Book {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
 
@@ -23,7 +25,7 @@ public class Book {
     private String title;
 
     @Column(nullable = false)
-    private Long author_id;
+    private int author_id;
 
     @Column(nullable = false)
     private String genre;
@@ -62,7 +64,7 @@ public class Book {
     public String getTitle() {
         return title;}
 
-    public Long getAuthor() {
+    public int getAuthor() {
         return author_id;}
 
     public String getGenre() {
@@ -106,7 +108,7 @@ public class Book {
         this.genre = genre;
     }
 
-    public void setAuthor(Long author_id) {
+    public void setAuthor(int author_id) {
         this.author_id = author_id;
     }
 
