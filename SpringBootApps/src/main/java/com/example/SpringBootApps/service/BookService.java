@@ -47,19 +47,6 @@ public class BookService {
     return authorRepository.save(author);
     }
 
-    //get book by author
-    public Book getBookByAuthor (Long authorId){
-        Author author = authorRepository.getById(authorId);
-        String authorName = author.getFirst_name();
-        List<Book> books = getAllBooks();
-        for (Book book : books){
-            if (book.getAuthor().equalsIgnoreCase(authorName)){
-                return book;
-            }
-        }
-        return null;
-    }
-
     //===================================================================
     // REST
     //===================================================================
