@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,14 +15,11 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // user id
     @Column(name = "user_id", nullable = false)
     private Integer userId;
 
-    // relationship to book
-    @ManyToOne
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+    @Column(name = "book_id", nullable = false)
+    private Long bookId;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
@@ -32,25 +27,17 @@ public class ShoppingCart {
     @Column(name = "total_price", nullable = false)
     private Double totalPrice;
 
-    // getters
+    // Getters
     public Long getId() { return id; }
-
     public Integer getUserId() { return userId; }
-
-    public Book getBook() { return book; }
-
+    public Long getBookId() { return bookId; }
     public Integer getQuantity() { return quantity; }
-
     public Double getTotalPrice() { return totalPrice; }
 
-    // setters
+    // Setters
     public void setId(Long id) { this.id = id; }
-
     public void setUserId(Integer userId) { this.userId = userId; }
-
-    public void setBook(Book book) { this.book = book; }
-
+    public void setBookId(Long bookId) { this.bookId = bookId; }
     public void setQuantity(Integer quantity) { this.quantity = quantity; }
-
     public void setTotalPrice(Double totalPrice) { this.totalPrice = totalPrice; }
 }

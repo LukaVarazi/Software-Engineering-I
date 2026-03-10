@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
 // repository interface handles database operations for the BOOK entity.
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
