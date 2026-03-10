@@ -9,10 +9,7 @@ import com.example.SpringBootApps.entity.ShoppingCart;
 
 @Repository
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
-
     List<ShoppingCart> findByUserId(Integer userId);
-
-    ShoppingCart findByUserIdAndBook_Id(Integer userId, Long bookId);
-
-    void deleteByUserIdAndBook_Id(Integer userId, Long bookId);
+    ShoppingCart findByUserIdAndBookId(Integer userId, Long bookId);
+    void deleteByUserIdAndBookId(Integer userId, Long bookId);
 }
