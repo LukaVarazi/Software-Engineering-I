@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.example.SpringBootApps.entity.Book;
 
+@Repository
+public interface BookRepository extends JpaRepository<Book, Long> {
+    // no extra methods needed
+}
 // repository interface handles database operations for the BOOK entity.
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
