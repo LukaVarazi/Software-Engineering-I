@@ -1,5 +1,8 @@
 package com.example.SpringBootApps.entity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 //entity classes (for book entities/book objects)
 //includes getters and setters for book attributes.
@@ -20,7 +23,7 @@ public class Book {
     private String title;
 
     @Column(nullable = false)
-    private String author;
+    private Long author_id;
 
     @Column(nullable = false)
     private String genre;
@@ -59,8 +62,8 @@ public class Book {
     public String getTitle() {
         return title;}
 
-    public String getAuthor() {
-        return author;}
+    public Long getAuthor() {
+        return author_id;}
 
     public String getGenre() {
         return genre;}
@@ -103,8 +106,8 @@ public class Book {
         this.genre = genre;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthor(Long author_id) {
+        this.author_id = author_id;
     }
 
     public void setPublisher(String publisher) {
