@@ -12,8 +12,8 @@ import com.example.SpringBootApps.entity.Book;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
     @Query(
-        value = "SELECT * FROM book_table WHERE authorId LIKE CONCAT('%', :authorId, '%')",
+        value = "SELECT * FROM book_table WHERE authorId LIKE CONCAT('%', :author_id, '%')",
         nativeQuery=true
     )
-    List<Book> findByAuthorId(@Param("authorId") Long authorId);
+    List<Book> findByAuthorId(@Param("author_id") Long authorId);
 }
