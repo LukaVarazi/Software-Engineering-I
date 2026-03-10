@@ -12,7 +12,7 @@ import com.example.SpringBootApps.entity.Book;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
     @Query(
-        value = "SELECT * FROM book_table WHERE authorId LIKE CONCAT('%', :author_id, '%')",
+        value = "SELECT * FROM book_table WHERE author_id = :author_id",
         nativeQuery=true
     )
     List<Book> findByAuthorId(@Param("author_id") Long authorId);
