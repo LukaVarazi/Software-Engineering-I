@@ -47,6 +47,10 @@ public class BookService {
     return authorRepository.save(author);
     }
 
+    public List<Book> findBooksByAuthorId(Long author_id) {
+    return bookRepository.findByAuthorId(author_id);
+    }
+
     //===================================================================
     // REST
     //===================================================================

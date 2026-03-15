@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.SpringBootApps.entity.Author;
 import com.example.SpringBootApps.entity.Book;
-import com.example.SpringBootApps.repository.BookRepository;
 import com.example.SpringBootApps.service.BookService;
 
 // controller class handles HTTP requests for REST API
@@ -24,12 +23,10 @@ import com.example.SpringBootApps.service.BookService;
 public class BookController {
 
     private final BookService bookService;
-    private final BookRepository bookRepository;
 
     @Autowired
-    public BookController(BookService bookService, BookRepository bookRepository) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
-        this.bookRepository = bookRepository;
     }
 
     //===================================================================
@@ -64,8 +61,12 @@ public class BookController {
 
     //get books by Author id
     @GetMapping("/authors/{author_id}")
-    public List<Book> getBooksByAuthor(@PathVariable Long author_id){
-        return bookRepository.findByAuthorId(author_id);
+    public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable Long author_id){
+        List<Book> books = bookService.findBooksByAuthorId(author_id);
+        if (books.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(books);
     }
 
     //===================================================================
