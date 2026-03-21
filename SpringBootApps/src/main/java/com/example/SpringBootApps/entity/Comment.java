@@ -1,6 +1,7 @@
 package com.example.SpringBootApps.entity;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,12 +17,19 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private Long userId;
-    private Long bookId;
-    private String comment;
 
+    @Column(nullable = false)
+    private Long bookId;
+
+    @Column(nullable = false)
+    private String comment;
+    
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
 
