@@ -64,7 +64,13 @@ public class RateAndCommentController {
     // Get Comments
     @GetMapping("/comments/{bookId}")
     public ResponseEntity<List<Comment>> getComments(@PathVariable Long bookId) {
-        return ResponseEntity.ok(rateAndCommentService.getCommentsByBook(bookId));
+        List<Comment> comments = rateAndCommentService.getCommentsByBook(bookId);
+
+        if (comments.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(comments);
     }
     //===================================================================
 }
