@@ -42,13 +42,13 @@ public class Rating {
     public Long getUserId() {
         return userId;}
 
-    public Long getbookId() {
+    public Long getBookId() {
         return bookId;}
 
-    public Long getRating() {
+    public Long getRateValue() {
         return rateValue;}
 
-    public LocalDateTime getDate() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;}
 
 
@@ -61,11 +61,11 @@ public class Rating {
         this.userId = userId;
     }
 
-    public void setISBN(Long bookId) {
+    public void setBookId(Long bookId) {
         this.bookId = bookId;
     }
 
-    public void setRating(Long rateValue) {
+    public void setRateValue(Long rateValue) {
         this.rateValue = rateValue;
     }
 

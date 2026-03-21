@@ -44,15 +44,12 @@ public class RateAndCommentController {
     //get average rating by bookId
     @GetMapping("/ratings/{bookId}")
     public ResponseEntity<Double> getAverageRating(@PathVariable Long bookId) {
-
-        List<Long> ratings = rateAndCommentService.findAllRatings(bookId);
-
-        if (ratings.isEmpty()) {
+        Double avg = rateAndCommentService.findAverageRating(bookId);
+        
+        if (avg == null) {
             return ResponseEntity.noContent().build();
         }
-
-        double avg = ratings.stream().mapToLong(Long::longValue).average().orElse(0);
-
+        
         return ResponseEntity.ok(avg);
     }
 

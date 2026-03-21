@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.example.SpringBootApps.entity.Comment;
 
 
-// repository interface handles database operations for the BOOK entity.
+// repository interface handles database operations for the COMMENT entity.
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 

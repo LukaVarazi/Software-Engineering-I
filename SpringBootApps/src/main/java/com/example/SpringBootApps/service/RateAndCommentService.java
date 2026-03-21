@@ -37,17 +37,22 @@ public class RateAndCommentService {
 
     //Create a rating
     public Rating saveRating(Rating rating) {
-        if (!bookRepository.existsById(rating.getbookId())) {
+        if (!bookRepository.existsById(rating.getBookId())) {
             throw new RuntimeException("Book does not exist");
         }
-
+        
+        Long rateValue = rating.getRateValue();
+        if (rateValue == null || rateValue < 1 || rateValue > 5) {
+            throw new RuntimeException("Rating must be between 1 and 5");
+        }
+        
         rating.setCreatedAt(LocalDateTime.now());
         return rateRepository.save(rating);
     }
 
     // Retreive Average Ratings
-    public List<Long> findAllRatings(Long bookId) {
-        return rateRepository.getAllRatings(bookId);
+    public Double findAverageRating(Long bookId) {
+        return rateRepository.getAverageRating(bookId);
     }
 
     //===================================================================
@@ -56,10 +61,19 @@ public class RateAndCommentService {
 
     // Create a comment
     public Comment saveComment(Comment comment) {
-        if (!bookRepository.existsById(comment.getbookId())) {
+        if (!bookRepository.existsById(comment.getBookId())) {
             throw new RuntimeException("Book does not exist");
         }
-
+        
+        // Add comment validation
+        if (comment.getComment() == null || comment.getComment().trim().isEmpty()) {
+            throw new RuntimeException("Comment cannot be empty");
+        }
+        
+        if (comment.getComment().length() > 1000) {
+            throw new RuntimeException("Comment exceeds maximum length of 1000 characters");
+        }
+        
         comment.setCreatedAt(LocalDateTime.now());
         return commentRepository.save(comment);
     }

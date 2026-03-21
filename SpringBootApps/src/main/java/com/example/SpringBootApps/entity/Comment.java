@@ -42,13 +42,13 @@ public class Comment {
     public Long getUserId() {
         return userId;}
 
-    public Long getbookId() {
+    public Long getBookId() {
         return bookId;}
 
-    public String getRating() {
+    public String getComment() {
         return comment;}
     
-    public LocalDateTime getDate() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;}
 
 
@@ -61,11 +61,11 @@ public class Comment {
         this.userId = userId;
     }
 
-    public void setISBN(Long bookId) {
+    public void setBookId(Long bookId) {
         this.bookId = bookId;
     }
 
-    public void setRating(String comment) {
+    public void setComment(String comment) {
         this.comment = comment;
     }
 
