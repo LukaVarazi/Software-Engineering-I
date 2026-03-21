@@ -1,14 +1,15 @@
 package com.example.SpringBootApps.service;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.SpringBootApps.entity.Rating;
 import com.example.SpringBootApps.entity.Comment;
+import com.example.SpringBootApps.entity.Rating;
+import com.example.SpringBootApps.repository.BookRepository;
 import com.example.SpringBootApps.repository.CommentRepository;
 import com.example.SpringBootApps.repository.RatingRepository;
-import java.time.LocalDateTime;
 
 
 /*
@@ -20,12 +21,14 @@ ex. delete book, save new book, update any attribute of a book, etc...
 public class RateAndCommentService {
     private final RatingRepository rateRepository;
     private final CommentRepository commentRepository;
+    private final BookRepository bookRepository;
 
     @Autowired
     public RateAndCommentService(RatingRepository rateRepository,
-                       CommentRepository commentRepository) {
+                       CommentRepository commentRepository, BookRepository bookRepository) {
         this.rateRepository = rateRepository;
         this.commentRepository = commentRepository;
+        this.bookRepository = bookRepository;
     }
 
     //===================================================================
@@ -34,6 +37,10 @@ public class RateAndCommentService {
 
     //Create a rating
     public Rating saveRating(Rating rating) {
+        if (!bookRepository.existsById(rating.getbookId())) {
+            throw new RuntimeException("Book does not exist");
+        }
+
         rating.setCreatedAt(LocalDateTime.now());
         return rateRepository.save(rating);
     }
@@ -49,6 +56,10 @@ public class RateAndCommentService {
 
     // Create a comment
     public Comment saveComment(Comment comment) {
+        if (!bookRepository.existsById(comment.getbookId())) {
+            throw new RuntimeException("Book does not exist");
+        }
+
         comment.setCreatedAt(LocalDateTime.now());
         return commentRepository.save(comment);
     }

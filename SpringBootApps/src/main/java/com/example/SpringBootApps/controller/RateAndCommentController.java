@@ -32,8 +32,13 @@ public class RateAndCommentController {
 
     //create a new book.
     @PostMapping("/rating")
-    public ResponseEntity<Rating> saveRating(@RequestBody Rating rating) {
-        return ResponseEntity.ok(rateAndCommentService.saveRating(rating));
+    public ResponseEntity<?> saveRating(@RequestBody Rating rating) {
+        try {
+            Rating savedRating = rateAndCommentService.saveRating(rating);
+            return ResponseEntity.ok(savedRating);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     //get average rating by bookId
@@ -57,8 +62,13 @@ public class RateAndCommentController {
 
     // Create a comment
     @PostMapping("/comment")
-    public ResponseEntity<Comment> saveComment(@RequestBody Comment comment) {
-        return ResponseEntity.ok(rateAndCommentService.saveComment(comment));
+    public ResponseEntity<?> saveComment(@RequestBody Comment comment) {
+        try {
+            Comment savedComment = rateAndCommentService.saveComment(comment);
+            return ResponseEntity.ok(savedComment);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     // Get Comments
