@@ -22,4 +22,11 @@ public class BookBrowsingService {
         return bookRepository.findAllByGenre(genre);
     }
 
+    public List<Book> findTop10Sellers(){
+        return bookRepository.findAllTopSellers();
+    }
+
+    public List<Book> findGreaterThanEqualRating( int rating){
+        return bookRepository.booksAboveRating(rating);
+    }
 }
