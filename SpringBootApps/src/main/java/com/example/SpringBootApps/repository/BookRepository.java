@@ -25,10 +25,19 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     )
     List<Book> findByAuthorId(@Param("author_id") Long authorId);
 
-    /*@Query(
-
+    //retrieves live data records of top 10 most sold books in descending order of sales.
+    @Query(
+            value = "SELECT * FROM book_table ORDER BY copies_sold DESC LIMIT 10",
+            nativeQuery = true
     )
-    List<Book> findTop10Sellers(@Param(""))
-#
-     */
+    List<Book> findAllTopSellers();
+
+    //retrieves list of books equal to or above specified rating
+    @Query(
+            value = "SELECT * FROM book_table WHERE book_table.rating >= :rating",
+            nativeQuery = true
+    )
+    List<Book> booksAboveRating(@Param("rating") int rating);
+
+
 }

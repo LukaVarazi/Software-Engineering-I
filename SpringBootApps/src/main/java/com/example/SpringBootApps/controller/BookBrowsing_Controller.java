@@ -29,5 +29,15 @@ public class BookBrowsing_Controller {
     }
 
     //GET list of top 10 sellers
+    @GetMapping("books/topSellers")
+    public List<Book> findTopSellers() {
+        return bookBrowsingService.findTop10Sellers();
+    }
+
+    //GET books above or equal to given rating
+    @GetMapping("books/rating/{rating}")
+    public List<Book> findBooksByRating(@PathVariable int rating) {
+        return bookBrowsingService.findGreaterThanEqualRating(rating);
+    }
 
 }
