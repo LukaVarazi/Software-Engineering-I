@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.SpringBootApps.entity.Author;
 import com.example.SpringBootApps.entity.Book;
 import com.example.SpringBootApps.service.BookService;
 
@@ -29,15 +28,17 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    //===================================================================
-    // BOOK DETAILS
-    //===================================================================
-
     //create a new book.
     @PostMapping("/book")
     public ResponseEntity<Book> saveBook(@RequestBody Book book) {
         Book newBook = bookService.saveBook(book);
         return ResponseEntity.ok(newBook);
+    }
+
+    //get all books
+    @GetMapping("/books")
+    public List<Book> getAllBooks() {
+        return bookService.getAllBooks();
     }
 
     //get book by id
@@ -46,37 +47,6 @@ public class BookController {
         Optional<Book> book = bookService.getBookById(id);
         return book.map(ResponseEntity::ok).orElseGet(() ->
                 ResponseEntity.notFound().build());
-    }
-
-    //create a new Author.
-    @PostMapping("/author")
-    public ResponseEntity<Author> saveAuthor(@RequestBody Author author) {
-        System.out.println("Received author: " + author.getFirst_name() + " " + author.getLast_name());
-        System.out.println("Biography: " + author.getBiography());
-        System.out.println("Publisher: " + author.getPublisher());
-
-        Author newAuthor = bookService.saveAuthor(author);
-        return ResponseEntity.ok(newAuthor);
-    }
-
-    //get books by Author id
-    @GetMapping("/authors/{author_id}")
-    public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable Long author_id){
-        List<Book> books = bookService.findBooksByAuthorId(author_id);
-        if (books.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(books);
-    }
-
-    //===================================================================
-    // REST
-    //===================================================================
-
-    //get all books
-    @GetMapping("/books")
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
     }
 
     //update book by id.
@@ -92,6 +62,4 @@ public class BookController {
         bookService.deleteBook(id);
         return ResponseEntity.ok("Book deleted successfully");
     }
-
-    //===================================================================
 }
