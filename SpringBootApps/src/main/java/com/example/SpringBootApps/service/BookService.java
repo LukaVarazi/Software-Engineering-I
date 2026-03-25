@@ -32,12 +32,12 @@ public class BookService {
     // BOOK DETAILS
     //===================================================================
 
-    //saving a book
+    //Saving a book
     public Book saveBook(Book book) {
         return bookRepository.save(book);
     }
 
-    //get book by id
+    //Get book by id
     public Optional<Book> getBookById(Long id) {
         return bookRepository.findById(id);
     }
@@ -47,6 +47,7 @@ public class BookService {
     return authorRepository.save(author);
     }
 
+    //Get book by author id
     public List<Book> findBooksByAuthorId(Long author_id) {
     return bookRepository.findByAuthorId(author_id);
     }
@@ -55,7 +56,7 @@ public class BookService {
     // REST
     //===================================================================
 
-    //get list of all books
+    //Get list of all books
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
@@ -81,7 +82,7 @@ public class BookService {
         }
     }
 
-    // delete a book by ID.
+    //Delete a book by ID.
     public void deleteBook(Long id) {
         bookRepository.deleteById(id);
     }
