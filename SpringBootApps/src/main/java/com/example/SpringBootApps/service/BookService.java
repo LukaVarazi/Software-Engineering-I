@@ -5,11 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.SpringBootApps.entity.Author;
 import com.example.SpringBootApps.entity.Book;
-import com.example.SpringBootApps.repository.AuthorRepository;
 import com.example.SpringBootApps.repository.BookRepository;
-
 
 /*
 Service class managing Book entities.
