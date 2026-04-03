@@ -36,14 +36,16 @@ public class ShoppingCartController {
 
     // Remove book from cart
     @DeleteMapping("/remove")
-    public Map<String, String> removeBookFromCart(@RequestParam Integer userId,
-                                              @RequestParam Long bookId) {
-        shoppingCartService.removeBookFromCart(userId, bookId);
+        public Map<String, String> removeBookFromCart(@RequestParam Integer userId,
+                                              @RequestParam Long bookId,
+                                              @RequestParam Integer quantity) {
+
+        shoppingCartService.removeBookFromCart(userId, bookId, quantity);
 
         Map<String, String> response = new HashMap<>();
-        response.put("Confirmation! ", "The selected book has been deleted from the cart.");
+        response.put("message", "Item quantity updated/removed successfully.");
         return response;
-    }
+}
 
     // Get cart with full book info
     @GetMapping("/{userId}/full")
@@ -53,7 +55,11 @@ public class ShoppingCartController {
 
     // Get subtotal
     @GetMapping("/{userId}/subtotal")
-    public Double getCartSubtotal(@PathVariable Integer userId) {
-        return shoppingCartService.getCartSubtotal(userId);
+    public Map<String, Double> getCartSubtotal(@PathVariable Integer userId) {
+        Double subtotal = shoppingCartService.getCartSubtotal(userId);
+        Map<String, Double> response = new HashMap<>();
+        response.put("subtotal", subtotal);
+
+        return response;
     }
 }

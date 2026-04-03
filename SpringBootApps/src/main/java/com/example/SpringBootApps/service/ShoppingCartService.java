@@ -1,5 +1,7 @@
 package com.example.SpringBootApps.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,8 +60,35 @@ public class ShoppingCartService {
 
     // Remove book
     @Transactional
-    public void removeBookFromCart(Integer userId, Long bookId) {
-        shoppingCartRepository.deleteByUserIdAndBookId(userId, bookId);
+    public void removeBookFromCart(Integer userId, Long bookId, Integer quantity) {
+        
+        ShoppingCart item = shoppingCartRepository.findByUserIdAndBookId(userId, bookId);
+
+        if (item == null) {
+            throw new RuntimeException("Item not found in cart");
+        }
+        int currentQuantity = item.getQuantity();
+
+        // Case 1: Remove completely
+        if (quantity >= currentQuantity) {
+            shoppingCartRepository.delete(item);
+            return;
+        }
+
+        // Case 2: Reduce quantity
+        int newQuantity = currentQuantity - quantity;
+
+        // Get unit price
+        double unitPrice = item.getTotalPrice() / currentQuantity;
+
+        item.setQuantity(newQuantity);
+        item.setTotalPrice(
+            BigDecimal.valueOf(unitPrice * newQuantity)
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue()
+        );
+
+        shoppingCartRepository.save(item);
     }
 
     // Get cart with full book info
