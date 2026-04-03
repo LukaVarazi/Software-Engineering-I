@@ -39,5 +39,11 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     )
     List<Book> booksAboveRating(@Param("rating") int rating);
 
+    //retrieves list of books under given publisher
+    @Query(
+            value = "SELECT * FROM book_table WHERE publisher = :publisher",
+            nativeQuery = true
+    )
+    List<Book> findAllUnderPublisher(@Param("publisher") String publisher);
 
 }

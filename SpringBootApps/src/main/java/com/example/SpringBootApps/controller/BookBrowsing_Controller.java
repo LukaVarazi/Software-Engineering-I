@@ -1,6 +1,7 @@
 package com.example.SpringBootApps.controller;
 import com.example.SpringBootApps.entity.Book;
 import com.example.SpringBootApps.service.BookBrowsingService;
+import com.example.SpringBootApps.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,4 +41,15 @@ public class BookBrowsing_Controller {
         return bookBrowsingService.findGreaterThanEqualRating(rating);
     }
 
+    //PUT price to books under the given publisher in the book_table
+    @PutMapping("books/discountByPublisher/{publisher}/{discount}")
+    public ResponseEntity<List<Book>> updateBookPrice(
+            @PathVariable String publisher,
+            @PathVariable double discount) {
+
+        List<Book> updatedBooks =
+                bookBrowsingService.updatePriceByDiscountPercent(publisher, discount);
+
+        return ResponseEntity.ok(updatedBooks);
+    }
 }
