@@ -1,6 +1,7 @@
 package com.example.SpringBootApps.service;
 import com.example.SpringBootApps.entity.Book;
 import com.example.SpringBootApps.repository.BookRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Service;
@@ -29,4 +30,22 @@ public class BookBrowsingService {
     public List<Book> findGreaterThanEqualRating( int rating){
         return bookRepository.booksAboveRating(rating);
     }
+
+    @Transactional
+    public List<Book> updatePriceByDiscountPercent(String publisher, double discountPercent) {
+        List<Book> books = bookRepository.findAllUnderPublisher(publisher);
+
+        if (books.isEmpty()) {
+            throw new RuntimeException("No books found for publisher");
+        }
+
+        for (Book book : books) {
+            double newPrice = book.getPrice() * (1 - (discountPercent / 100.0));
+            book.setPrice(newPrice);
+            book.setDiscount_percent(discountPercent);
+        }
+
+        return bookRepository.saveAll(books);
+    }
 }
+
