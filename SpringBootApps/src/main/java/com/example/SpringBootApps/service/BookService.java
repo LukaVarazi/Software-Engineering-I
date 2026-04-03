@@ -2,6 +2,8 @@ package com.example.SpringBootApps.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.SpringBootApps.entity.Author;
+import com.example.SpringBootApps.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
