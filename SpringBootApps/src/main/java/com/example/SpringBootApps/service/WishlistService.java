@@ -25,6 +25,9 @@ public class WishlistService {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+
 
     // Create a wishlist for a user
     public Wishlist createWishlist(Long userId, Wishlist wishlist) {
@@ -54,28 +57,32 @@ public class WishlistService {
         wishlistRepository.save(wishlist);
     }
 
-    // Get all wishlists
-    public List<Wishlist> getAllWishlists() {
-        return wishlistRepository.findAll();
-    }
-
     // Get wishlist by ID
     public Optional<Wishlist> getWishlistById(Long id) {
         return wishlistRepository.findById(id);
     }
 
-    // Update wishlist
-    public Wishlist updateWishlist(Long id, Wishlist updatedWishlist) {
-        Wishlist wishlist = wishlistRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Wishlist not found."));
+    //Remove book from wishlist and move it to shopping cart
+    public void moveBookToCart(Long wishlistId, Long bookId) {
+        Wishlist wishlist = wishlistRepository.findById(wishlistId)
+            .orElseThrow(() -> new RuntimeException("Wishlist not found"));
 
-        wishlist.setName(updatedWishlist.getName());
-        // Update other fields if needed
-        return wishlistRepository.save(wishlist);
+        Book book = bookRepository.findById(bookId)
+            .orElseThrow(() -> new RuntimeException("Book not found"));
+
+        //Add to cart
+        shoppingCartService.addBookToCart(wishlist.getUser().getUserId().intValue(), bookId);
+
+        //Remove book from wishlist
+        wishlist.getBooks().remove(book);
+        wishlistRepository.save(wishlist);
     }
 
-    // Delete wishlist
-    public void deleteWishlist(Long id) {
-        wishlistRepository.deleteById(id);
+    //Get all books in a wishlist
+    public List<Book> getBooksInWishlist(Long wishlistId) {
+        Wishlist wishlist = wishlistRepository.findById(wishlistId)
+            .orElseThrow(() -> new RuntimeException("Wishlist not found"));
+
+        return wishlist.getBooks();
     }
 }

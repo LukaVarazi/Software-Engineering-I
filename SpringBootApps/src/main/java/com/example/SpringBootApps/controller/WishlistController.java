@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,12 +48,6 @@ public class WishlistController {
         return ResponseEntity.ok().build();
     }
 
-    // Get all wishlists
-    @GetMapping("/wishlists")
-    public List<Wishlist> getAllWishlists() {
-        return wishlistService.getAllWishlists();
-    }
-
     // Get wishlist by ID
     @GetMapping("/wishlists/{id}")
     public ResponseEntity<Wishlist> getWishlistById(@PathVariable Long id) {
@@ -63,27 +56,20 @@ public class WishlistController {
                        .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Update a wishlist
-    @PutMapping("/wishlists/{id}")
-    public ResponseEntity<Wishlist> updateWishlist(@PathVariable Long id, @RequestBody Wishlist wishlist) {
-        Wishlist updatedWishlist = wishlistService.updateWishlist(id, wishlist);
-        return ResponseEntity.ok(updatedWishlist);
-    }
+    // Remove a book from a wishlist and move it to shopping cart
+    @DeleteMapping("/wishlists/{wishlistId}/books/{bookId}")
+    public ResponseEntity<Void> moveBookToCart(
+        @PathVariable Long wishlistId,
+        @PathVariable Long bookId) {
 
-    // Delete a wishlist
-    @DeleteMapping("/wishlists/{id}")
-    public ResponseEntity<String> deleteWishlist(@PathVariable Long id) {
-        wishlistService.deleteWishlist(id);
-        return ResponseEntity.ok("Wishlist deleted successfully");
+        wishlistService.moveBookToCart(wishlistId, bookId);
+        return ResponseEntity.noContent().build();
     }
 
     // Get all books in a wishlist
-    @GetMapping("/wishlists/{id}/books")
-    public ResponseEntity<List<Book>> getBooksInWishlist(@PathVariable Long id) {
-        Optional<Wishlist> wishlist = wishlistService.getWishlistById(id);
-        if (wishlist.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(wishlist.get().getBooks());
+    @GetMapping("/wishlists/{wishlistId}/books")
+    public ResponseEntity<List<Book>> getBooksInWishlist(@PathVariable Long wishlistId) {
+        List<Book> books = wishlistService.getBooksInWishlist(wishlistId);
+        return ResponseEntity.ok(books);
     }
 }
